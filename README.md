@@ -1,6 +1,6 @@
 # Timo Decision Benchmark (TDB)
 
-[![Live Demo](https://img.shields.io/badge/Production%20Live%20Demo-TimoBuy.com-0f172a?style=for-the-badge&logo=safari&logoColor=white)](https://timobuy.com)
+[![Live Demo](https://img.shields.io/badge/Interactive%20Playground-TimoBuy.com%2Fdemo-0f172a?style=for-the-badge&logo=safari&logoColor=white)](https://timobuy.com/demo)
 [![CI](https://img.shields.io/github/actions/workflow/status/roc-chiang/timo-decision-benchmark/ci.yml?branch=main&style=for-the-badge&logo=github)](https://github.com/roc-chiang/timo-decision-benchmark/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 [![Benchmark Suite](https://img.shields.io/badge/Dataset-50%20Verified%20Scenarios-emerald.svg?style=for-the-badge)](datasets/scenarios_50.json)
@@ -140,12 +140,12 @@ Timo Fiduciary Decision Architecture     |     96.0% |       93.9% |    48.0ms |
 
 ---
 
-## 🌐 Try the Live Experience
+## 🌐 Try the Live Interactive Playground
 
-Experience how this decision philosophy works in a real consumer product:
+Experience how this decision philosophy works in real time with zero setup:
 
-👉 **[Launch TimoBuy (timobuy.com)](https://timobuy.com)**  
-*Ask any purchase question: "Should I buy X?", "Is Y worth upgrading?", "How do I fix Z?"*
+👉 **[Launch Interactive Playground (timobuy.com/demo)](https://timobuy.com/demo)**  
+*Pre-loaded with real-world dilemmas (M1 Pro vs M3 Pro, $1,200 DAC cable, Breville espresso fix). Run the decision head in 48ms and inspect physical rationales.*
 
 ---
 

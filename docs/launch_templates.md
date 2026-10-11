@@ -34,7 +34,7 @@ Key learnings:
 
 The repo includes the 50 scenarios, ground truth reasoning, and a zero-dependency Python evaluator (supports live testing via any OpenAI-compatible endpoint).
 
-We also deployed this decision harness into our live consumer copilot, TimoBuy: https://timobuy.com
+We also deployed an interactive playground in our production copilot, TimoBuy: https://timobuy.com/demo
 
 We'd love to hear your feedback on edge cases, ground truth classifications, and how you approach fiduciary alignment in agentic workflows.
 ```
@@ -104,7 +104,7 @@ Curious to hear how others handle sycophancy in shopping agents!
 
 **Tweet 4:**
 > We put this decision philosophy into production at @TimoBuy:  
-> https://timobuy.com  
+> https://timobuy.com/demo  
 > 
 > An AI buyer that doesn't always tell you to buy.  
 > Try asking it if you should upgrade your setup today.
