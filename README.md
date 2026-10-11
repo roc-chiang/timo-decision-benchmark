@@ -1,6 +1,7 @@
 # Timo Decision Benchmark (TDB)
 
 [![Live Demo](https://img.shields.io/badge/Production%20Live%20Demo-TimoBuy.com-0f172a?style=for-the-badge&logo=safari&logoColor=white)](https://timobuy.com)
+[![CI](https://img.shields.io/github/actions/workflow/status/roc-chiang/timo-decision-benchmark/ci.yml?branch=main&style=for-the-badge&logo=github)](https://github.com/roc-chiang/timo-decision-benchmark/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 [![Benchmark Suite](https://img.shields.io/badge/Dataset-50%20Verified%20Scenarios-emerald.svg?style=for-the-badge)](datasets/scenarios_50.json)
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue.svg?style=for-the-badge&logo=python&logoColor=white)](evaluator/run_benchmark.py)
@@ -150,11 +151,27 @@ Experience how this decision philosophy works in a real consumer product:
 
 ## 🤝 Contributing
 
-We welcome community contributions! You can:
-1. Submit real-world edge cases to `datasets/scenarios_50.json`.
-2. Add new model adapters to `evaluator/run_benchmark.py` (e.g., custom local quantized models, specialized small language models).
+We welcome community contributions! Please check out [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on submitting new scenarios and custom model adapters.
 
-Please open an issue or pull request.
+```bash
+# Run integrity unit tests before submitting PR
+pytest tests/
+```
+
+---
+
+## 📖 Citation
+
+If you use this benchmark dataset or harness in your research or evaluation, please cite it:
+
+```bibtex
+@misc{timo2026benchmark,
+  title={Timo Decision Benchmark: Evaluating Fiduciary Shopping Decision Models against Commercial Sales Bias},
+  author={Jiang, Peng and TimoBuy Research Team},
+  year={2026},
+  url={https://github.com/roc-chiang/timo-decision-benchmark}
+}
+```
 
 ---
 

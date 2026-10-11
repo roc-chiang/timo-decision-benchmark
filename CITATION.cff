@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this benchmark dataset or evaluation harness in your research, please cite it as below."
+authors:
+  - family-names: "Jiang"
+    given-names: "Peng"
+    affiliation: "TimoBuy Research"
+title: "Timo Decision Benchmark: Evaluating Fiduciary Shopping Decision Models against Commercial Sales Bias"
+version: 1.0.0
+date-released: 2026-10-10
+url: "https://github.com/roc-chiang/timo-decision-benchmark"
+keywords:
+  - decision-models
+  - ai-agents
+  - benchmark
+  - llm-evaluation
+  - fiduciary-ai
+  - e-commerce
+license: MIT

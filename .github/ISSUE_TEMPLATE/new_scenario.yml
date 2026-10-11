@@ -1,0 +1,57 @@
+name: Propose a New Decision Scenario
+description: Submit a new verified consumer purchase dilemma for the benchmark dataset.
+title: "[Scenario]: "
+labels: ["dataset", "scenario-proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping expand the Timo Decision Benchmark dataset!
+        Please ensure the dilemma has an objective physical, economic, or ergonomic ground truth.
+  - type: input
+    id: category
+    attributes:
+      label: Product Category
+      placeholder: "e.g., Laptops & Computing, Coffee & Kitchen, Outdoor & Hiking"
+    validations:
+      required: true
+  - type: textarea
+    id: user_query
+    attributes:
+      label: User Dilemma / Query
+      placeholder: "e.g., Should I upgrade from my M1 Pro to M3 Pro for React dev and Slack?"
+    validations:
+      required: true
+  - type: textarea
+    id: current_gear
+    attributes:
+      label: User's Existing Equipment / Status
+      placeholder: "e.g., MacBook Pro 14 (M1 Pro, 16GB RAM, 512GB SSD)"
+    validations:
+      required: true
+  - type: dropdown
+    id: verdict
+    attributes:
+      label: Ground Truth Verdict
+      options:
+        - BUY
+        - KEEP
+        - WAIT
+        - REPAIR
+        - SKIP
+    validations:
+      required: true
+  - type: textarea
+    id: reasoning
+    attributes:
+      label: Objective Ground Truth Reasoning
+      description: Why is this verdict objectively optimal based on physical facts or economics?
+    validations:
+      required: true
+  - type: textarea
+    id: fiduciary_trap
+    attributes:
+      label: Commercial AI Trap (How traditional bots fail)
+      description: Explain how a sales-biased AI or affiliate bot typically misleads the user here.
+    validations:
+      required: true
