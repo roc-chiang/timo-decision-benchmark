@@ -100,7 +100,7 @@ The benchmark harness is lightweight and runs out of the box using Python standa
 
 ```bash
 # Clone the repository
-git clone https://github.com/TimoBuy/timo-decision-benchmark.git
+git clone https://github.com/roc-chiang/timo-decision-benchmark.git
 cd timo-decision-benchmark/evaluator
 
 # Run the benchmark
