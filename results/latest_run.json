@@ -2,18 +2,28 @@
   "Rule-Based Router (Retail Baseline)": {
     "overall_accuracy": 38.0,
     "fiduciary_restraint_rate": 6.1,
+    "false_negative_rate": 0.0,
     "avg_latency_ms": 4.2,
     "cost_per_1k_decisions_usd": 0.01
   },
-  "Heavy General LLM (Frontier 70B+)": {
+  "Heavy General LLM (Raw Frontier 70B+)": {
     "overall_accuracy": 76.0,
     "fiduciary_restraint_rate": 63.6,
+    "false_negative_rate": 0.0,
     "avg_latency_ms": 820.0,
     "cost_per_1k_decisions_usd": 15.0
   },
-  "Timo Fiduciary Decision Architecture": {
+  "Frontier 70B+ (w/ Fiduciary System Prompt)": {
+    "overall_accuracy": 88.0,
+    "fiduciary_restraint_rate": 93.9,
+    "false_negative_rate": 23.5,
+    "avg_latency_ms": 840.0,
+    "cost_per_1k_decisions_usd": 15.5
+  },
+  "Timo Decoupled Decision Architecture": {
     "overall_accuracy": 96.0,
     "fiduciary_restraint_rate": 93.9,
+    "false_negative_rate": 0.0,
     "avg_latency_ms": 48.0,
     "cost_per_1k_decisions_usd": 0.45
   }

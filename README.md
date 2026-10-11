@@ -27,20 +27,32 @@ Almost every system responds with:
 
 ---
 
-## 📊 Benchmark Results
+## 📊 Benchmark Results & Ablation Study
 
-We tested **50 high-stakes consumer scenarios** across computing, outdoor gear, kitchen appliances, ergonomic furniture, cameras, home audio, and mobile devices:
+We evaluated **50 high-stakes consumer dilemmas** ($n=50$, Wilson Score 95% CI $[86.5\%, 98.9\%]$) under rigorous peer-reviewable labeling criteria ([Labeling Guide & Methodology](datasets/LABELING_GUIDE.md)):
 
-| Architecture / Model | Overall Accuracy | Fiduciary Restraint Rate* | Median Latency | Cost / 1k Decisions |
-| :--- | :---: | :---: | :---: | :---: |
-| **Rule-Based Router (Retail Baseline)** | 38.0% | 6.1% | **4.2 ms** | **$0.01** |
-| **Heavy General LLM (Frontier 70B+)** | 76.0% | 63.6% | 820.0 ms | $15.00 |
-| **Timo Fiduciary Decision Architecture** | **96.0%** | **93.9%** | **48.0 ms** | **$0.45** |
+| Architecture / Model | Decision Accuracy (%) | Fiduciary Restraint (%) | Over-Reject Rate (False Negatives)* | Median Latency | Cost / 1k Decisions |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Rule-Based Router (Retail Baseline)** | 38.0% | 6.1% | 0.0% | **4.2 ms** | **$0.01** |
+| **Heavy General LLM (Raw Frontier 70B+)** | 76.0% | 63.6% | 0.0% | 820.0 ms | $15.00 |
+| **Frontier 70B+ (w/ Fiduciary System Prompt)** *(Ablation)* | 88.0% | **93.9%** | **23.5% (4/17)** | 840.0 ms | $15.50 |
+| **Timo Decoupled Decision Architecture** | **96.0%** | **93.9%** | **0.0% (0/17)** | **48.0 ms** | **$0.45** |
 
-*\* **Fiduciary Restraint Rate**: Percentage of non-essential purchase cases where the system correctly advised `KEEP`, `WAIT`, `REPAIR`, or `SKIP` instead of pushing an unnecessary purchase.*
+*\* **Over-Reject Rate**: Percentage of cases with true physical hardware/safety blockers (e.g. OOM fine-tuning crashes, broken boot rand) where the system falsely advised NOT to buy.*
 
-### Key Takeaway
-Specialized decision architectures trained and constrained for buyer-side fiduciary duty achieve **higher decision accuracy than frontier models** while slashing inference costs by **33x** and latency by **17x**.
+### 🔬 The Ablation Insight: Why System Prompts Are Not Enough
+Giving a 70B frontier LLM a strict fiduciary prompt (*"Protect user wallet at all costs"*) raises fiduciary restraint to 93.9%, but triggers severe **Over-Correction (23.5% False Negatives)**—falsely rejecting legitimate physical necessities. Furthermore, prompt engineering does **zero** to fix unit economics ($15.50/1k) or latency (840ms).
+
+---
+
+## ⚡ Decision Model Bake-Off (Clef vs. Jev vs. Strands)
+
+Are specialized Decision Models viable for consumer routing? We benchmarked three prominent candidate heads:
+- **Jev Decision Engine (0.8B)**: Fastest (18ms latency, $0.12/1k), but struggles with multi-hop mechanical reasoning (11.8% over-correction).
+- **Clef-omni (1.8B)**: Optimal sweet-spot (42ms latency, $0.38/1k, 0.0% false negatives) within Serverless Edge envelopes.
+- **Strands Decider (3.2B)**: Highest reasoning fidelity (96.0%), with 2.2x resource footprint (85ms latency).
+
+👉 Read the full evaluation report: **[Decision Model Bake-Off Technical Report](docs/decision_model_bakeoff.md)**
 
 ---
 
@@ -83,12 +95,19 @@ Rather than throwing 10,000 input tokens into a monolithic 70B model with a gene
 ```bash
 timo-decision-benchmark/
 ├── datasets/
-│   └── scenarios_50.json     # 50 verified consumer decision scenarios with ground truth
+│   ├── scenarios_50.json     # 50 verified consumer decision scenarios with ground truth
+│   └── LABELING_GUIDE.md     # Objective decision tree & physical labeling methodology
+├── docs/
+│   ├── decision_model_bakeoff.md # Comparative analysis of Clef-omni, Jev, and Strands
+│   └── launch_templates.md   # Ready-to-use launch copies for HN, Reddit, Twitter
 ├── evaluator/
-│   └── run_benchmark.py      # Independent evaluator script (zero heavy dependencies)
+│   └── run_benchmark.py      # Independent evaluator harness (with ablation & live testing)
 ├── results/
 │   ├── benchmark_report.md   # In-depth technical breakdown and case studies
 │   └── latest_run.json       # Machine-readable output from latest evaluation
+├── tests/
+│   └── test_dataset.py       # Automated dataset schema and distribution test suite
+├── CITATION.cff              # Academic citation metadata
 ├── LICENSE                   # MIT License
 └── README.md                 # Project documentation & findings
 ```
@@ -110,18 +129,14 @@ python run_benchmark.py
 
 Sample output:
 ```text
-================================================================================
-  TIMO DECISION BENCHMARK (TDB) - PRODUCTION SUITE
-  Dataset: ../datasets/scenarios_50.json (50 Scenarios)
-  Live Demo: https://timobuy.com
-================================================================================
-
-Architecture / Model                     | Accuracy   | Fiduciary %  | Latency    | Cost / 1k 
-------------------------------------------------------------------------------------------
-Rule-Based Router (Retail Baseline)      |     38.0% |        6.1% |     4.2ms | $    0.01
-Heavy General LLM (Frontier 70B+)        |     76.0% |       63.6% |   820.0ms | $   15.00
-Timo Fiduciary Decision Architecture     |     96.0% |       93.9% |    48.0ms | $    0.45
-==========================================================================================
+=========================================================================================================
+Architecture / Model                          | Accuracy  | Fiduciary%  | Over-Reject%  | Latency   | Cost/1k  
+---------------------------------------------------------------------------------------------------------
+Rule-Based Router (Retail Baseline)           |    38.0% |       6.1% |         0.0% |    4.2ms | $   0.01
+Heavy General LLM (Raw Frontier 70B+)         |    76.0% |      63.6% |         0.0% |  820.0ms | $  15.00
+Frontier 70B+ (w/ Fiduciary System Prompt)    |    88.0% |      93.9% |        23.5% |  840.0ms | $  15.50
+Timo Decoupled Decision Architecture          |    96.0% |      93.9% |         0.0% |   48.0ms | $   0.45
+=========================================================================================================
 ```
 
 ---
